@@ -1,0 +1,21 @@
+{
+  "name": "movies-explorer-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "lint": "npx eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aloe-99/movies-explorer-api.git"
+  },
+  "author": "Tim Shalonsky",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aloe-99/movies-explorer-api/issues"
+  },
+  "homepage": "https://github.com/aloe-99/movies-explorer-api#readme"
+}
