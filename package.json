@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/aloe-99/movies-explorer-api/issues"
   },
-  "homepage": "https://github.com/aloe-99/movies-explorer-api#readme"
+  "homepage": "https://github.com/aloe-99/movies-explorer-api#readme",
+  "dependencies": {
+    "mongoose": "^6.7.3"
+  }
 }
