@@ -6,10 +6,10 @@ const { PORT = 3000 } = process.env;
 
 const app = express();
 
-const usersRouter = require('./routes/usersRouter')
-const moviesRouter = require('./routes/moviesRouter')
+const usersRouter = require('./routes/usersRouter');
+const moviesRouter = require('./routes/moviesRouter');
 
-mongoose.connect('mongodb://localhost:27017/mestodb', {
+mongoose.connect('mongodb://localhost:27017/bitfilmsdb', {
   useNewUrlParser: true,
 });
 

@@ -2,7 +2,7 @@ const usersRouter = require('express').Router();
 
 const {
   getAboutMe, updateProfile
-} = require('../controllers/user.js');
+} = require('../controllers/user');
 
 usersRouter.get('/me', getAboutMe);
 
