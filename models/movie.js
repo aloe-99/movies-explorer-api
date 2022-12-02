@@ -52,11 +52,11 @@ const movieSchema = new mongoose.Schema({
     required: true,
   },
   owner: {
-    type: String,
+    type: mongoose.Types.ObjectId,
     required: true,
   },
   movieId: {
-    type: String,
+    type: mongoose.Types.ObjectId,
     required: true,
     unique: true,
   },
