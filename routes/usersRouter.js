@@ -1,8 +1,8 @@
 const usersRouter = require('express').Router();
 
-const {
-  getAboutMe, updateProfile
-} = require('../controllers/user');
+const bodyParser = require('body-parser');
+
+const { getAboutMe, updateProfile } = require('../controllers/user');
 
 usersRouter.get('/me', getAboutMe);
 

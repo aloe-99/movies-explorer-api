@@ -3,23 +3,23 @@ const mongoose = require('mongoose');
 const movieSchema = new mongoose.Schema({
   country: {
     type: String,
-    required: true
+    required: true,
   },
   director: {
     type: String,
-    required: true
+    required: true,
   },
   duration: {
     type: Number,
-    required: true
+    required: true,
   },
   year: {
     type: String,
-    required: true
+    required: true,
   },
   description: {
     type: String,
-    required: true
+    required: true,
   },
   image: {
     validate: {
@@ -29,7 +29,7 @@ const movieSchema = new mongoose.Schema({
       message: (props) => `${props.value} is not a valid link!`,
     },
     type: String,
-    required: true
+    required: true,
   },
   trailerLink: {
     validate: {
@@ -39,7 +39,7 @@ const movieSchema = new mongoose.Schema({
       message: (props) => `${props.value} is not a valid link!`,
     },
     type: String,
-    required: true
+    required: true,
   },
   thumbnail: {
     validate: {
@@ -49,23 +49,24 @@ const movieSchema = new mongoose.Schema({
       message: (props) => `${props.value} is not a valid link!`,
     },
     type: String,
-    required: true
+    required: true,
   },
   owner: {
-    type: ObjectId,
-    required: true
+    type: String,
+    required: true,
   },
   movieId: {
-    type: ObjectId,
-    required: true
+    type: String,
+    required: true,
+    unique: true,
   },
   nameRU: {
     type: String,
-    required: true
+    required: true,
   },
   nameEN: {
     type: String,
-    required: true
+    required: true,
   },
 });
 
