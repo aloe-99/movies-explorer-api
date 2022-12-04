@@ -1,0 +1,26 @@
+{
+  "env": {
+    "browser": "true",
+    "commonjs": "true",
+    "es2021": "true"
+  },
+  "extends": "airbnb-base",
+  "overrides": [],
+  "parserOptions": {
+    "ecmaVersion": "latest"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "rules": {
+    "no-underscore-dangle": "off",
+    "no-param-reassign": "off",
+    "no-console": "off",
+    "no-useless-escape": "off",
+    "no-unused-vars": "off",
+    "consistent-return": "off",
+    "func-names": "off"
+  }
+}
