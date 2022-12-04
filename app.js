@@ -12,6 +12,8 @@ const { PORT = 3000, MOVIESDB } = process.env;
 
 const app = express();
 
+const CORS = require('./middlewares/CORS');
+
 const usersRouter = require('./routes/usersRouter');
 const moviesRouter = require('./routes/moviesRouter');
 
@@ -33,6 +35,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(requestLogger);
+
+app.use(CORS);
 
 app.post('/signin', celebrate({
   body: Joi.object().keys({
