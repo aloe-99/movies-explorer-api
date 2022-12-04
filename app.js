@@ -26,7 +26,6 @@ const NotFoundError = require('./errors/NotFoundError');
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-// mongodb://localhost:27017/moviesdb
 mongoose.connect(MOVIESDB, {
   useNewUrlParser: true,
 });
