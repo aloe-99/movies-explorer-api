@@ -23,16 +23,15 @@ moviesRouter.post('/', celebrate({
     image: Joi.string().required().pattern(/^https?:\/\/([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\.-]*)*\/?$/),
     trailerLink: Joi.string().required().pattern(/^https?:\/\/([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\.-]*)*\/?$/),
     thumbnail: Joi.string().required().pattern(/^https?:\/\/([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\.-]*)*\/?$/),
-    owner: Joi.string().required().alphanum().pattern(/^[0-9a-fA-F]{24}$/),
     movieId: Joi.string().required().alphanum().pattern(/^[0-9a-fA-F]{24}$/),
-    nameRU: Joi.string().required(),
-    nameEN: Joi.string().required(),
+    nameRU: Joi.string().required().pattern(/^[а-яА-ЯёЁ0-9]+$/),
+    nameEN: Joi.string().required().pattern(/^[a-zA-Z0-9]+$/),
   }),
 }), createMovie);
 
-moviesRouter.delete('movies/:movieId', celebrate({
+moviesRouter.delete('/:movieId', celebrate({
   params: Joi.object().keys({
-    cardId: Joi.string().alphanum().pattern(/^[0-9a-fA-F]{24}$/),
+    movieId: Joi.string().alphanum().pattern(/^[0-9a-fA-F]{24}$/),
   }),
 }), deleteMovie);
 
