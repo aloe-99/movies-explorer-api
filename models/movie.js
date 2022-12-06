@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+const { cirillicRegExp, latinRegExp, urlRegExp } = require('../utils/regExp');
+
 const movieSchema = new mongoose.Schema({
   country: {
     type: String,
@@ -24,7 +26,7 @@ const movieSchema = new mongoose.Schema({
   image: {
     validate: {
       validator(v) {
-        return /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\.-]*)*\/?$/.test(v);
+        return urlRegExp.test(v);
       },
       message: (props) => `${props.value} is not a valid link!`,
     },
@@ -34,7 +36,7 @@ const movieSchema = new mongoose.Schema({
   trailerLink: {
     validate: {
       validator(v) {
-        return /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\.-]*)*\/?$/.test(v);
+        return urlRegExp.test(v);
       },
       message: (props) => `${props.value} is not a valid link!`,
     },
@@ -44,7 +46,7 @@ const movieSchema = new mongoose.Schema({
   thumbnail: {
     validate: {
       validator(v) {
-        return /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\.-]*)*\/?$/.test(v);
+        return urlRegExp.test(v);
       },
       message: (props) => `${props.value} is not a valid link!`,
     },
@@ -56,15 +58,27 @@ const movieSchema = new mongoose.Schema({
     required: true,
   },
   movieId: {
-    type: mongoose.Types.ObjectId,
+    type: Number,
     required: true,
     unique: true,
   },
   nameRU: {
+    validate: {
+      validator(v) {
+        return cirillicRegExp.test(v);
+      },
+      message: (props) => `${props.value} is not a valid language!`,
+    },
     type: String,
     required: true,
   },
   nameEN: {
+    validate: {
+      validator(v) {
+        return latinRegExp.test(v);
+      },
+      message: (props) => `${props.value} is not a valid language!`,
+    },
     type: String,
     required: true,
   },

@@ -34,10 +34,12 @@ module.exports.updateProfile = (req, res, next) => {
     .then((user) => res.send(user))
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new BadRequestError('Переданы некорректные данные'));
-      } else {
-        next(err);
+        return next(new BadRequestError('Переданы некорректные данные'));
       }
+      if (err.code === 11000) {
+        return next(new DuplicateError('Пользователь с данным email уже зарегестрирован'));
+      }
+      return next(err);
     });
 };
 
@@ -56,12 +58,12 @@ module.exports.createUser = (req, res, next) => {
       })
       .catch((err) => {
         if (err.code === 11000) {
-          next(new DuplicateError('Пользователь с данным email уже зарегистрирован'));
-        } else if (err.name === 'ValidationError') {
-          next(new BadRequestError('Переданы некорректные данные'));
-        } else {
-          next(err);
+          return next(new DuplicateError('Пользователь с данным email уже зарегистрирован'));
         }
+        if (err.name === 'ValidationError') {
+          return next(new BadRequestError('Переданы некорректные данные'));
+        }
+        return next(err);
       }))
     .catch(next);
 };

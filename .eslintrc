@@ -15,12 +15,6 @@
     }
   },
   "rules": {
-    "no-underscore-dangle": "off",
-    "no-param-reassign": "off",
-    "no-console": "off",
-    "no-useless-escape": "off",
-    "no-unused-vars": "off",
-    "consistent-return": "off",
-    "func-names": "off"
+    "no-underscore-dangle": "off"
   }
 }

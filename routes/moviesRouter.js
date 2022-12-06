@@ -4,9 +4,13 @@ const bodyParser = require('body-parser');
 
 const { celebrate, Joi } = require('celebrate');
 
+const validator = require('validator');
+
 const {
   getMovies, createMovie, deleteMovie,
 } = require('../controllers/movie');
+
+const { cirillicRegExp, latinRegExp } = require('../utils/regExp');
 
 moviesRouter.use(bodyParser.json());
 moviesRouter.use(bodyParser.urlencoded({ extended: true }));
@@ -20,18 +24,33 @@ moviesRouter.post('/', celebrate({
     duration: Joi.number().required(),
     year: Joi.string().required(),
     description: Joi.string().required(),
-    image: Joi.string().required().pattern(/^https?:\/\/([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\.-]*)*\/?$/),
-    trailerLink: Joi.string().required().pattern(/^https?:\/\/([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\.-]*)*\/?$/),
-    thumbnail: Joi.string().required().pattern(/^https?:\/\/([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\.-]*)*\/?$/),
-    movieId: Joi.string().required().alphanum().pattern(/^[0-9a-fA-F]{24}$/),
-    nameRU: Joi.string().required().pattern(/^[а-яА-ЯёЁ0-9]+$/),
-    nameEN: Joi.string().required().pattern(/^[a-zA-Z0-9]+$/),
+    image: Joi.string().required().custom((value, helpers) => {
+      if (validator.isURL(value)) {
+        return value;
+      }
+      return helpers.message('Поле image заполнено некорректно');
+    }),
+    trailerLink: Joi.string().required().custom((value, helpers) => {
+      if (validator.isURL(value)) {
+        return value;
+      }
+      return helpers.message('Поле trailerLink заполнено некорректно');
+    }),
+    thumbnail: Joi.string().required().custom((value, helpers) => {
+      if (validator.isURL(value)) {
+        return value;
+      }
+      return helpers.message('Поле thumbnail заполнено некорректно');
+    }),
+    movieId: Joi.number().required(),
+    nameRU: Joi.string().required().pattern(cirillicRegExp),
+    nameEN: Joi.string().required().pattern(latinRegExp),
   }),
 }), createMovie);
 
 moviesRouter.delete('/:movieId', celebrate({
   params: Joi.object().keys({
-    movieId: Joi.string().alphanum().pattern(/^[0-9a-fA-F]{24}$/),
+    movieId: Joi.number(),
   }),
 }), deleteMovie);
 

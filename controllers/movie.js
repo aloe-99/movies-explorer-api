@@ -44,10 +44,9 @@ module.exports.createMovie = (req, res, next) => {
     .then((movies) => res.send(movies))
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new BadRequestError('Переданы некорректные данные'));
-      } else {
-        next(err);
+        return next(new BadRequestError('Переданы некорректные данные'));
       }
+      return next(err);
     });
 };
 
@@ -59,12 +58,11 @@ module.exports.deleteMovie = (req, res, next) => {
     .then((movie) => {
       const owner = movie.owner.toString();
       if (owner === user) {
-        Movie.findByIdAndRemove(movieId)
+        return Movie.findByIdAndRemove(movieId)
           .then((movies) => res.send(movies))
           .catch(next);
-      } else {
-        next(new ForbiddenError('Доступ к запрашиваемому ресурсу заблокирован'));
       }
+      return next(new ForbiddenError('Доступ к запрашиваемому ресурсу заблокирован'));
     })
     .catch(next);
 };
