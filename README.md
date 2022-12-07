@@ -4,6 +4,7 @@
 
 IP 158.160.44.186
 
-Домен: https://api.movies.aloe.nomoredomains.icu/
+Домен: https://api.movies.aloe.nomoredomains.club/
+
 
 Ссылка на репозиторий GitHub: https://github.com/aloe-99/movies-explorer-api
