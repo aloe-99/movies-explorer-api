@@ -10,8 +10,6 @@ const {
   getMovies, createMovie, deleteMovie,
 } = require('../controllers/movie');
 
-const { cirillicRegExp, latinRegExp } = require('../utils/regExp');
-
 moviesRouter.use(bodyParser.json());
 moviesRouter.use(bodyParser.urlencoded({ extended: true }));
 
@@ -43,8 +41,8 @@ moviesRouter.post('/', celebrate({
       return helpers.message('Поле thumbnail заполнено некорректно');
     }),
     movieId: Joi.number().required(),
-    nameRU: Joi.string().required().pattern(cirillicRegExp),
-    nameEN: Joi.string().required().pattern(latinRegExp),
+    nameRU: Joi.string().required(),
+    nameEN: Joi.string().required(),
   }),
 }), createMovie);
 
