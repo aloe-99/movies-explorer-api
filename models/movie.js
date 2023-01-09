@@ -63,22 +63,10 @@ const movieSchema = new mongoose.Schema({
     unique: true,
   },
   nameRU: {
-    validate: {
-      validator(v) {
-        return cirillicRegExp.test(v);
-      },
-      message: (props) => `${props.value} is not a valid language!`,
-    },
     type: String,
     required: true,
   },
   nameEN: {
-    validate: {
-      validator(v) {
-        return latinRegExp.test(v);
-      },
-      message: (props) => `${props.value} is not a valid language!`,
-    },
     type: String,
     required: true,
   },
