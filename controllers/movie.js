@@ -53,12 +53,12 @@ module.exports.createMovie = (req, res, next) => {
 module.exports.deleteMovie = (req, res, next) => {
   const { movieId } = req.params;
   const user = req.user._id;
-  Movie.findById(movieId)
+  Movie.findOne(movieId)
     .orFail(new NotFoundError('Запрашиваемый объект не найден'))
     .then((movie) => {
       const owner = movie.owner.toString();
       if (owner === user) {
-        return Movie.findByIdAndRemove(movieId)
+        return Movie.findOneAndDelete(movieId)
           .then((movies) => res.send(movies))
           .catch(next);
       }
