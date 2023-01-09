@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const { cirillicRegExp, latinRegExp, urlRegExp } = require('../utils/regExp');
+const { urlRegExp } = require('../utils/regExp');
 
 const movieSchema = new mongoose.Schema({
   country: {
