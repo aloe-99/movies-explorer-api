@@ -53,7 +53,7 @@ module.exports.createMovie = (req, res, next) => {
 module.exports.deleteMovie = (req, res, next) => {
   const { movieId } = req.params;
   const user = req.user._id;
-  Movie.findOne(movieId)
+  Movie.findOne({ movieId })
     .orFail(new NotFoundError('Запрашиваемый объект не найден'))
     .then((movie) => {
       const owner = movie.owner.toString();
