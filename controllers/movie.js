@@ -58,7 +58,7 @@ module.exports.deleteMovie = (req, res, next) => {
     .then((movie) => {
       const owner = movie.owner.toString();
       if (owner === user) {
-        return Movie.findOneAndDelete(movieId)
+        return Movie.findOneAndDelete({ movieId })
           .then((movies) => res.send(movies))
           .catch(next);
       }
