@@ -7,7 +7,8 @@ const BadRequestError = require('../errors/BadRequestError');
 const ForbiddenError = require('../errors/ForbiddenError');
 
 module.exports.getMovies = (req, res, next) => {
-  Movie.find({})
+  const user = req.user._id;
+  Movie.find({ owner: user })
     .then((movies) => res.send(movies))
     .catch(next);
 };
@@ -58,7 +59,7 @@ module.exports.deleteMovie = (req, res, next) => {
     .then((movie) => {
       const owner = movie.owner.toString();
       if (owner === user) {
-        return Movie.findOneAndDelete({ movieId })
+        return Movie.findOneAndDelete({ movieId, owner: user })
           .then((movies) => res.send(movies))
           .catch(next);
       }
